@@ -33171,13 +33171,13 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }, {
         _id: 2,
         Title: 'The Shawshank Redemption',
-        Description: 'desc2...',
+        Description: 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency',
         ImagePath: 'https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg'
       }, {
         _id: 3,
         Title: 'Gladiator',
-        Description: 'desc3...',
-        ImagePath: 'https://flxt.tmsimg.com/assets/p24674_p_v8_ae.jpg'
+        Description: 'A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery.',
+        ImagePath: 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQo_O8X1L56DAr8hFZz-B8ku7vvcvbrBh5plxWxa_Y1uIWA9Ohr'
       }],
       selectedMovie: null
     };
