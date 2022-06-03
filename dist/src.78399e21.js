@@ -33103,7 +33103,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         className: "value"
       }, movie.Description)), /*#__PURE__*/_react.default.createElement("button", {
         onClick: function onClick() {
-          onBackClick(null);
+          return window.location.replace("/");
         }
       }, "Back"));
     }
@@ -33166,8 +33166,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       movies: [{
         _id: 1,
         Title: 'Inception',
-        Description: 'desc1...',
-        ImagePath: '...'
+        Description: 'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster',
+        ImagePath: 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ1wNJi3WBo8wjZ-lxg4xPbg6-X7tQ1w6ZFI5L-RH1rUiOOGxLO'
       }, {
         _id: 2,
         Title: 'The Shawshank Redemption',
@@ -33389,7 +33389,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53994" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50069" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
