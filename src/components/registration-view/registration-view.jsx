@@ -1,4 +1,6 @@
-class Registration extends Component {
+import React from 'react';
+
+class Registration extends React.Component {
     state = {  } 
     render() { 
         return (
