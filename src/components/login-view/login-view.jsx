@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+//login for user - taking username and password
 export function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -46,4 +47,3 @@ export function LoginView(props) {
     </form>
   );
 }
-
