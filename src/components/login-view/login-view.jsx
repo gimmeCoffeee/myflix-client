@@ -1,23 +1,49 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-export function Login(props) {
+export function LoginView(props) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-  const [Username, setUsername] = useState('')
-  const [Password, setPassword] = useState('')
-       
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(username, password);
+    props.onLoggedIn(username);
+  };
+
+  const handleRegister = (e) => {
+      e.preventDefault()
+      props.onRegister(true)
+  }
+
+
   return (
-    <form action="" method="post">
-   <div class="container">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="Username" onChange={(evt) => setUsername(evt.target.value)} required />
-    <br />
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password"  onChange={(evt) => setPassword(evt.target.value)} name="Password" required />
-     <br/>     
-    <button type="button" onClick={()=>props.onLoggedIn({Username: Username, Password: Password})}>Login</button>
-  </div>
-</form>
-        );
-    
+    <form>
+      <label>
+        Username:
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </label>
+      <label>
+        Password:
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </label>
+      <button type="submit" onClick={handleSubmit}>
+        Submit
+      </button>
+      <button
+        type="submit"
+        onClick={handleRegister}
+      >
+        Register Here
+      </button>
+    </form>
+  );
 }
- 
+
