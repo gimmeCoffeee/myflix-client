@@ -50,6 +50,11 @@ export class MainView extends React.Component {
     });
   }
 
+  onBackClick(newSelectedMovie) 
+  { 
+    this.setSelectedMovie(newSelectedMovie);
+  }
+
   onLoggedIn (Username, Password) {
     axios.post(`https://movieapi-0162.herokuapp.com/login?Username=${Username}&Password=${Password}`)
     .then(response => {
@@ -77,7 +82,7 @@ export class MainView extends React.Component {
     return (
       <div className="main-view">
         {selectedMovie
-          ? <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
+          ? <MovieView movie={selectedMovie} onBackClick={this.onBackClick}/>
           : movies.map(movie => (
             <MovieCard key={movie._id} movie={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie) }}/>
           ))
