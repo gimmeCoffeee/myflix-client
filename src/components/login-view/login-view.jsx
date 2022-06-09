@@ -24,12 +24,39 @@ class Login extends Component {
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="Password"  onChange={(evt) => this.setState({Password: evt.target.value})} required />
 
-    <button type="submit">Login</button>
-  </div>
+  const handleRegister = (e) => {
+      e.preventDefault()
+      props.onRegister(true)
+  }
 
-</form>
-        );
-    }
+
+  return (
+    <form>
+      <label>
+        Username:
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </label>
+      <label>
+        Password:
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </label>
+      <button type="submit" onClick={handleSubmit}>
+        Submit
+      </button>
+      <button
+        type="submit"
+        onClick={handleRegister}
+      >
+        Register Here
+      </button>
+    </form>
+  );
 }
- 
-export default Login;
