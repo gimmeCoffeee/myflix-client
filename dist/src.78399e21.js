@@ -37554,6 +37554,117 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.MovieView = MovieView;
+},{"react":"../node_modules/react/index.js"}],"components/login-view/login-view.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var Login = /*#__PURE__*/function (_Component) {
+  _inherits(Login, _Component);
+
+  var _super = _createSuper(Login);
+
+  function Login() {
+    var _this;
+
+    _classCallCheck(this, Login);
+
+    _this = _super.call(this);
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
+      Username: "",
+      Password: ""
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "login", function (evt) {
+      evt.preventDefault();
+
+      _this.props.onLoggedIn(_this.state.Username, _this.state.Password);
+    });
+
+    _this.login = _this.login.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Login, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return /*#__PURE__*/_react.default.createElement("form", {
+        onSubmit: function onSubmit(evt) {
+          return _this2.login(evt);
+        }
+      }, /*#__PURE__*/_react.default.createElement("div", {
+        class: "container"
+      }, /*#__PURE__*/_react.default.createElement("label", {
+        for: "uname"
+      }, /*#__PURE__*/_react.default.createElement("b", null, "Username")), /*#__PURE__*/_react.default.createElement("input", {
+        type: "text",
+        placeholder: "Enter Username",
+        name: "Username",
+        required: true,
+        onChange: function onChange(evt) {
+          return _this2.setState({
+            Username: evt.target.value
+          });
+        }
+      }), /*#__PURE__*/_react.default.createElement("label", {
+        for: "psw"
+      }, /*#__PURE__*/_react.default.createElement("b", null, "Password")), /*#__PURE__*/_react.default.createElement("input", {
+        type: "password",
+        placeholder: "Enter Password",
+        name: "Password",
+        onChange: function onChange(evt) {
+          return _this2.setState({
+            Password: evt.target.value
+          });
+        },
+        required: true
+      }), /*#__PURE__*/_react.default.createElement("button", {
+        type: "submit"
+      }, "Login")));
+    }
+  }]);
+
+  return Login;
+}(_react.Component);
+
+var _default = Login;
+exports.default = _default;
 },{"react":"../node_modules/react/index.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
@@ -37569,6 +37680,8 @@ var _axios = _interopRequireDefault(require("axios"));
 var _movieCard = require("../movie-card/movie-card");
 
 var _movieView = require("../movie-view/movie-view");
+
+var _loginView = _interopRequireDefault(require("../login-view/login-view"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37606,9 +37719,11 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this);
     _this.state = {
+      user: "",
       movies: [],
       selectedMovie: null
     };
+    _this.onLoggedIn = _this.onLoggedIn.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -37633,13 +37748,30 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "onLoggedIn",
+    value: function onLoggedIn(Username, Password) {
+      var _this3 = this;
+
+      _axios.default.post("https://movieapi-0162.herokuapp.com/login?Username=".concat(Username, "&Password=").concat(Password)).then(function (response) {
+        _this3.setState({
+          user: response.data.user.Username
+        });
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var _this$state = this.state,
           movies = _this$state.movies,
-          selectedMovie = _this$state.selectedMovie;
+          selectedMovi = _this$state.selectedMovi,
+          user = _this$state.user;
+      if (!user) return /*#__PURE__*/_react.default.createElement(_loginView.default, {
+        onLoggedIn: this.onLoggedIn
+      });
       if (selectedMovie) return /*#__PURE__*/_react.default.createElement(_movieView.MovieView, {
         movie: selectedMovie
       });
@@ -37651,14 +37783,14 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }, selectedMovie ? /*#__PURE__*/_react.default.createElement(_movieView.MovieView, {
         movie: selectedMovie,
         onBackClick: function onBackClick(newSelectedMovie) {
-          _this3.setSelectedMovie(newSelectedMovie);
+          _this4.setSelectedMovie(newSelectedMovie);
         }
       }) : movies.map(function (movie) {
         return /*#__PURE__*/_react.default.createElement(_movieCard.MovieCard, {
           key: movie._id,
           movie: movie,
           onMovieClick: function onMovieClick(movie) {
-            _this3.setSelectedMovie(movie);
+            _this4.setSelectedMovie(movie);
           }
         });
       }));
@@ -37671,7 +37803,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 exports.MainView = MainView;
 var _default = MainView;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -37830,7 +37962,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50268" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56112" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

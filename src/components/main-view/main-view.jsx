@@ -2,16 +2,20 @@ import React from 'react';
 import axios from 'axios';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+import Login from '../login-view/login-view';
 
 export class MainView extends React.Component {
 
   constructor(){
     super();
     this.state = {
+      user: "",
       movies: [],
       selectedMovie: null
     }
+    this.onLoggedIn = this.onLoggedIn.bind(this);
   }
+  
 
   componentDidMount(){
     axios.get('https://movieapi-0162.herokuapp.com/movies')
@@ -31,8 +35,22 @@ export class MainView extends React.Component {
     });
   }
 
+  onLoggedIn (Username, Password) {
+    axios.post(`https://movieapi-0162.herokuapp.com/login?Username=${Username}&Password=${Password}`)
+    .then(response => {
+      this.setState({
+        user: response.data.user.Username
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
+  }
   render() {
-    const { movies, selectedMovie } = this.state;
+    const { movies, selectedMovi, user } = this.state;
+
+    if (!user) return <Login onLoggedIn={this.onLoggedIn} />
 
     if (selectedMovie) return <MovieView movie={selectedMovie} />;
   
