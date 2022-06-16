@@ -1,12 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
+import axios from "axios";
 
 export class MovieView extends React.Component {
-  render() {
-    const { movie, onBackClick } = this.props;
 
+  render() {
+    const { movie } = this.props;
+    function onBackClick() {
+      window.location.reload()
+    }
     return (
       <div className="movie-view">
+         <Button className="backButton" onClick={() => { onBackClick(null); }}>
+         &#8592; Back</Button>
         <div className="movie-poster">
           <img src={movie.ImagePath} />
         </div>
@@ -18,37 +24,7 @@ export class MovieView extends React.Component {
           <span className="label">Description: </span>
           <span className="value">{movie.Description}</span>
         </div>
-        <div className="movie-director">
-          <span className="label">Director: </span>
-          <span className="value">{movie.Director.Name}</span>
         </div>
-        <div className="movie-genre">
-          <span className="label">Genre: </span>
-          <span className="value">{movie.Genre.Name}</span>
-        </div>
-        <button
-          onClick={() => {
-            onBackClick(movie.Title);
-          }}
-        >
-          Back
-        </button>
-      </div>
     );
   }
 }
-
-MovieView.propTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
-    Genre: PropTypes.shape({
-      Name: PropTypes.string,
-    }),
-    Director: PropTypes.shape({
-      Name: PropTypes.string,
-    }),
-  }).isRequired,
-
-  onBackClick: PropTypes.func.isRequired,
-};
