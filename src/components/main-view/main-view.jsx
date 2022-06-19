@@ -47,18 +47,6 @@ export class MainView extends React.Component{
       }
 
     componentDidMount(){
-      // axios.get('https://movie-api-karelyss.herokuapp.com/movies')
-      //   .then(response => {
-      //     this.setState({
-      //       movies: response.data
-      //     });
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
-
-        // this.login('jondoe2', 'passcode1')
-        // this.getMovies()
     }
 
       setSelectedMovie(newSelectedMovie) {
