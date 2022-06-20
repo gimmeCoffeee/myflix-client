@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 
 
 import "../../index.scss"
@@ -14,34 +14,36 @@ export class Registration extends React.Component {
     }
   
   render() {
-    const { login } = this.props;
+    const { register, login } = this.props;
 
     return (
-      <div className="movie-card">
-        
-        <div class="container">
-        <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required 
-        onChange={(evt)=> this.setState({username: evt.target.value}) } />
+        <Form onSubmit={(evt)=>{evt.preventDefault();register(this.state.username, this.state.password) } }>
+        <Form.Group controlId="formUsername">
+          <Form.Label>Username:</Form.Label>
+          <Form.Control type="text" name="Username" onChange={(e) => this.setState({username: e.target.value})} />
+        </Form.Group>
+  
+        <Form.Group controlId="formPassword">
+          <Form.Label>Password:</Form.Label>
+          <Form.Control type="password" name="Password" onChange={(e) => this.setState({password: e.target.value})} />
+        </Form.Group>
 
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required
-         onChange={(evt)=> this.setState({password: evt.target.value}) }
-         />
+        <Form.Group controlId="formEmail">
+          <Form.Label>Email:</Form.Label>
+          <Form.Control type="text" name="Email" onChange={(e) => this.setState({email: e.target.value})} />
+        </Form.Group>
 
-        <label for="bday"><b>Birthday</b></label>
-        <input type="date" placeholder="Enter Birthdate" name="bday" required
-         onChange={(evt)=> this.setState({password: evt.target.value}) }
-         />
-
-        <label for="email"><b>Email</b></label>
-        <input type="email" placeholder="Enter Email" name="email" required
-         onChange={(evt)=> this.setState({password: evt.target.value}) }
-         />
-      </div>
-
-        <Button className="movie-button primary" onClick={() => { register(this.state.username, this.state.password, this.state.email, this.state.birthdate) }}>Register</Button>
-        </div>
+        <Form.Group controlId="formBirthday">
+          <Form.Label>Birthday:</Form.Label>
+          <Form.Control type="date" name="Birthday" onChange={(e) => this.setState({birthday: e.target.value})} />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+        <Button variant="primary" type="button"  onClick={()=>login()}>
+        Login
+      </Button>
+      </Form>
     );
     // return <div className="movie-card" onClick={() => { onMovieClick(movie); }}>{movie.Title}</div>;
   }
