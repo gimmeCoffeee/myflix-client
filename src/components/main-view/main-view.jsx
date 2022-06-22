@@ -18,7 +18,7 @@ export class MainView extends React.Component{
           movies: [],
           selectedMovie: null,
           user: '',
-          reg: false
+          reg: false,
         }
         this.login = this.login.bind(this);
         this.OnRegister = this.OnRegister.bind(this)
@@ -38,8 +38,10 @@ export class MainView extends React.Component{
       }
 
       register(username, password, birthday, email){
-        axios.post(`${url}users`)
+        axios.post(`${url}users/register`, {Username: username, Password: password, Email: email, Birthdate: birthday
+        })
         .then(result=>{
+          alert("Registered!") 
           window.location.replace("/")
         })      
       }
@@ -67,7 +69,7 @@ export class MainView extends React.Component{
     render() {
       const { movies, selectedMovie, user, reg } = this.state;
       console.log(movies)
-      if(reg) return <Registration />
+      if(reg) return <Registration register = {this.register} login={this.OnLogin} />
       if(!user) return <Login login={this.login} register={this.OnRegister} />
       if (selectedMovie) return <MovieView movie={selectedMovie} />;
     

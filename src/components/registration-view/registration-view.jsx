@@ -17,7 +17,7 @@ export class Registration extends React.Component {
     const { register, login } = this.props;
 
     return (
-        <Form onSubmit={(evt)=>{evt.preventDefault();register(this.state.username, this.state.password) } }>
+        <Form onSubmit={(evt)=>{evt.preventDefault();register(this.state.username, this.state.password, this.state.birthday, this.state.email) } }>
         <Form.Group controlId="formUsername">
           <Form.Label>Username:</Form.Label>
           <Form.Control type="text" name="Username" onChange={(e) => this.setState({username: e.target.value})} />
@@ -40,7 +40,7 @@ export class Registration extends React.Component {
         <Button variant="primary" type="submit">
           Submit
         </Button>
-        <Button variant="primary" type="button"  onClick={()=>login()}>
+        <Button variant="primary" type="button"  onClick={()=>window.location.replace("/")}>
         Login
       </Button>
       </Form>
