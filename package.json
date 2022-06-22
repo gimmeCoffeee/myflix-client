@@ -1,28 +1,25 @@
 {
   "name": "myflix-client",
   "version": "1.0.0",
-  "description": "Front end to the MyFlix app",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel src/index.html"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gimmeCoffeee/myflix-client.git"
+    "start": "npx parcel src/index.html"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/gimmeCoffeee/myflix-client/issues"
-  },
-  "homepage": "https://github.com/gimmeCoffeee/myflix-client#readme",
-  "devDependencies": {
-    "parcel-bundler": "^1.12.5",
-    "sass": "^1.52.1"
-  },
   "dependencies": {
+    "axios": "^0.27.2",
+    "parcel-bundler": "^1.12.5",
     "react": "^18.1.0",
+    "react-bootstrap": "^2.4.0",
     "react-dom": "^18.1.0"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.6.0",
+    "buffer": "^6.0.3",
+    "node-sass": "^7.0.1",
+    "process": "^0.11.10"
   }
 }

@@ -1,44 +1,107 @@
 import React from 'react';
+import axios from 'axios';
+import ReactDOM from 'react-dom';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 
-export class MainView extends React.Component {
+import "../../index.scss"
+import { Container, Row, Col } from 'react-bootstrap';
+import { Login } from '../login-view/login-view';
+import { Registration } from '../registration-view/registration-view';
 
-  constructor(){
-    super();
-    this.state = {
-      movies: [
-        { _id: 1, Title: 'Inception', Description: 'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster', ImagePath: 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ1wNJi3WBo8wjZ-lxg4xPbg6-X7tQ1w6ZFI5L-RH1rUiOOGxLO'},
-        { _id: 2, Title: 'The Shawshank Redemption', Description: 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency', ImagePath: 'https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg'},
-        { _id: 3, Title: 'Gladiator', Description: 'A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery.', ImagePath: 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQo_O8X1L56DAr8hFZz-B8ku7vvcvbrBh5plxWxa_Y1uIWA9Ohr'}
-      ],
-      selectedMovie: null
-    }
-  }
+ const url = 'https://movieapi-0162.herokuapp.com/';
 
-  setSelectedMovie(newSelectedMovie) {
-    this.setState({
-      selectedMovie: newSelectedMovie
-    });
-  }
-
-  render() {
-    const { movies, selectedMovie } = this.state;
-
-    if (selectedMovie) return <MovieView movie={selectedMovie} />;
-  
-    if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
-  
-    return (
-      <div className="main-view">
-        {selectedMovie
-          ? <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
-          : movies.map(movie => (
-            <MovieCard key={movie._id} movie={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie) }}/>
-          ))
+export class MainView extends React.Component{
+      constructor() {
+        super();
+        this.state = {
+          movies: [],
+          selectedMovie: null,
+          user: '',
+          reg: false,
         }
-      </div>
-    );
-  }
-}
-export default MainView;
+        this.login = this.login.bind(this);
+        this.OnRegister = this.OnRegister.bind(this)
+        this.getMovies = this.getMovies.bind(this);
+        this.setSelectedMovie = this.setSelectedMovie.bind(this)
+      }
+    
+     login(username, password){
+        axios.post(`${url}login?Username=${username}&Password=${password}`)
+        .then(result=>{
+          localStorage.setItem('token', result.data.token)
+          this.setState({
+            user: result.data.user.Username
+          });
+          this.getMovies();
+        })
+      }
+
+      register(username, password, birthday, email){
+        axios.post(`${url}users/register`, {Username: username, Password: password, Email: email, Birthdate: birthday
+        })
+        .then(result=>{
+          alert("Registered!") 
+          window.location.replace("/")
+        })      
+      }
+      OnRegister() {
+        this.setState({reg: true})
+      }
+
+      getMovies() {
+        axios.get(`${url}movies`, {
+          headers : {
+            Authorization : 'Bearer '+localStorage.getItem('token')
+          }
+        }).then(result=>this.setState({movies: result.data}) )
+      }
+
+    componentDidMount(){
+    }
+
+      setSelectedMovie(newSelectedMovie) {
+        this.setState({
+          selectedMovie: newSelectedMovie
+        });
+      }
+
+    render() {
+      const { movies, selectedMovie, user, reg } = this.state;
+      console.log(movies)
+      if(reg) return <Registration register = {this.register} login={this.OnLogin} />
+      if(!user) return <Login login={this.login} register={this.OnRegister} />
+      if (selectedMovie) return <MovieView movie={selectedMovie} />;
+    
+      if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
+    
+        return (
+          <div className="main-view">
+            {selectedMovie
+              ?
+                <Row className="justify-content-md-center">
+                  <Col md={8}>
+                    <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
+                  </Col>
+                </Row>
+              : 
+              <Row className="justify-content-md-center">
+                {
+                  movies.map(movie => (
+                <Col md={3}>
+                  <MovieCard key={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }}/>
+                  </Col>
+             ))
+              }
+              </Row>
+            }
+          </div>
+        );
+      }
+
+    }
+    
+
+
+    
+  
