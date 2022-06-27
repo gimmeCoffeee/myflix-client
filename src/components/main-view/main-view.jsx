@@ -5,7 +5,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 
 import "../../index.scss"
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button, Header } from 'react-bootstrap';
 import { Login } from '../login-view/login-view';
 import { Registration } from '../registration-view/registration-view';
 
@@ -55,16 +55,36 @@ export class MainView extends React.Component{
             Authorization : 'Bearer '+localStorage.getItem('token')
           }
         }).then(result=>this.setState({movies: result.data}) )
+        .catch(function (error) {
+          console.log(error);
+        });
       }
 
-    componentDidMount(){
-    }
+      onLoggedOut() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        this.setState({
+          user: null
+        });
+      }
+
+      componentDidMount() {
+        let accessToken = localStorage.getItem('token');
+        if (accessToken !== null) {
+          this.setState({
+            user: localStorage.getItem('user')
+          });
+          this.getMovies(accessToken);
+        }
+      }
 
       setSelectedMovie(newSelectedMovie) {
         this.setState({
           selectedMovie: newSelectedMovie
         });
       }
+
+      // 
 
     render() {
       const { movies, selectedMovie, user, reg } = this.state;
@@ -76,6 +96,11 @@ export class MainView extends React.Component{
       if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
     
         return (
+          <div>
+            <header>
+              <h1 style={{color: 'red'}}>MyFlix</h1>
+            <Button variant="danger" onClick={() => { this.onLoggedOut() }} style={{marginBottom: 20, float: 'right'}}>Logout</Button>
+            </header>
           <div className="main-view">
             {selectedMovie
               ?
@@ -95,6 +120,7 @@ export class MainView extends React.Component{
               }
               </Row>
             }
+          </div>
           </div>
         );
       }
