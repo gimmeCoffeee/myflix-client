@@ -1,29 +1,43 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Button, Form } from 'react-bootstrap';
+import axios from 'axios';
 
 
 import "../../index.scss"
 
-export class Login extends React.Component {
+export function Login(props) {
  
-    state = {
-        username: '',
-        password: ''
-    }
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (e) => {
+      e.preventDefault();
+      /* Send a request to the server for authentication */
+      axios.post('${url}/login', {
+        Username: username,
+        Password: password
+      })
+      .then(response => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch(e => {
+        console.log('no such user')
+      });
+    };
   
-  render() {
-    const { login, register } = this.props;
+    const { login, register } = props;
 
     return (
-      <Form onSubmit={(evt)=>{evt.preventDefault();login(this.state.username, this.state.password) } }>
+      <Form onSubmit={(evt)=>{evt.preventDefault();login(username, password) } }>
       <Form.Group controlId="formUsername">
         <Form.Label>Username:</Form.Label>
-        <Form.Control type="text" name="Username" onChange={(e) => this.setState({username: e.target.value})} />
+        <Form.Control required type="text" name="Username" onChange={(e) => setUsername(e.target.value)} />
       </Form.Group>
 
       <Form.Group controlId="formPassword">
         <Form.Label>Password:</Form.Label>
-        <Form.Control type="password" name="Password" onChange={(e) => this.setState({password: e.target.value})} />
+        <Form.Control required type="password" name="Password" onChange={(e) => setPassword(e.target.value)} />
       </Form.Group>
       <Button variant="primary" type="submit">
         Login
@@ -33,7 +47,4 @@ export class Login extends React.Component {
       </Button>
     </Form>
     );
-    // return <div className="movie-card" onClick={() => { onMovieClick(movie); }}>{movie.Title}</div>;
   }
-
-}
