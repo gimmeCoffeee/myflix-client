@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Redirect, Routes } from "react-router-dom";
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
-
+import MoviesList from '../movies-view/movies-view';
 import "../../index.scss"
 import { Container, Row, Col, Button, Header } from 'react-bootstrap';
 import { Login } from '../login-view/login-view';
@@ -21,9 +22,8 @@ export class MainView extends React.Component{
           reg: false,
         }
         this.login = this.login.bind(this);
-        this.OnRegister = this.OnRegister.bind(this)
         this.getMovies = this.getMovies.bind(this);
-        this.setSelectedMovie = this.setSelectedMovie.bind(this)
+        this.onMovieClick = this.onMovieClick.bind(this)
       }
     
      login(username, password){
@@ -34,6 +34,7 @@ export class MainView extends React.Component{
             user: result.data.user.Username
           });
           this.getMovies();
+          window.location.replace("/movies")
         })
       }
 
@@ -44,9 +45,6 @@ export class MainView extends React.Component{
           alert("Registered!") 
           window.location.replace("/")
         })      
-      }
-      OnRegister() {
-        this.setState({reg: true})
       }
 
       getMovies() {
@@ -84,43 +82,37 @@ export class MainView extends React.Component{
         });
       }
 
+      onMovieClick(newSelectedMovie) {
+         console.log(newSelectedMovie);
+         
+         this.setState({
+          selectedMovie: newSelectedMovie
+        });
+        
+        }
+      onBackClick(newSelectedMovie) { this.setSelectedMovie(newSelectedMovie); }
       // 
 
     render() {
-      const { movies, selectedMovie, user, reg } = this.state;
-      console.log(movies)
-      if(reg) return <Registration register = {this.register} login={this.OnLogin} />
-      if(!user) return <Login login={this.login} register={this.OnRegister} />
-      if (selectedMovie) return <MovieView movie={selectedMovie} />;
-    
-      if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
-    
+      const { movies, selectedMovie, user, reg } = this.state;      
         return (
           <div>
+            <Router>
             <header>
               <h1 style={{color: 'red'}}>MyFlix</h1>
             <Button variant="danger" onClick={() => { this.onLoggedOut() }} style={{marginBottom: 20, float: 'right'}}>Logout</Button>
             </header>
-          <div className="main-view">
-            {selectedMovie
-              ?
-                <Row className="justify-content-md-center">
-                  <Col md={8}>
-                    <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
-                  </Col>
-                </Row>
-              : 
-              <Row className="justify-content-md-center">
-                {
-                  movies.map(movie => (
-                <Col md={3}>
-                  <MovieCard key={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }}/>
-                  </Col>
-             ))
-              }
-              </Row>
-            }
-          </div>
+            <Routes>
+            <Route exact={true} path="/" element={ <Login login={this.login} />} >
+             
+            </Route>
+            <Route exact={true} path="/register" element={ <Registration register = {this.register} />} >
+           </Route>
+            <Route exact={true} path="/movies" element={ <MoviesList onMovieClick={this.onMovieClick}
+            onBackClick={this.onBackClick}  movies={movies} selectedMovie={selectedMovie} />} >
+           </Route>
+          </Routes>
+            </Router>
           </div>
         );
       }
