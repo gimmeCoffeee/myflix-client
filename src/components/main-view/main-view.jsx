@@ -9,6 +9,8 @@ import "../../index.scss"
 import { Container, Row, Col, Button, Header } from 'react-bootstrap';
 import { Login } from '../login-view/login-view';
 import { Registration } from '../registration-view/registration-view';
+import DirectorView from '../director-view/director-view';
+import GenreView from '../genre-view/genre-view';
 
  const url = 'https://movieapi-0162.herokuapp.com/';
 
@@ -104,13 +106,19 @@ export class MainView extends React.Component{
             </header>
             <Routes>
             <Route exact={true} path="/" element={ <Login login={this.login} />} >
-             
             </Route>
             <Route exact={true} path="/register" element={ <Registration register = {this.register} />} >
            </Route>
             <Route exact={true} path="/movies" element={ <MoviesList onMovieClick={this.onMovieClick}
             onBackClick={this.onBackClick}  movies={movies} selectedMovie={selectedMovie} />} >
            </Route>
+
+           <Route exact={true} path="/director" element={ <DirectorView />} >
+           </Route>
+
+           <Route exact={true} path="/genre" element={ <GenreView />} >
+           </Route>
+
           </Routes>
             </Router>
           </div>
