@@ -6,6 +6,7 @@ export class MovieView extends React.Component {
 
   render() {
     const { movie } = this.props;
+    console.log(movie)
     function onBackClick() {
       window.location.reload()
     }
@@ -24,6 +25,10 @@ export class MovieView extends React.Component {
           <span className="label">Description: </span>
           <span className="value">{movie.Description}</span>
         </div>
+        <Button className="backButton" onClick={() => { window.location.replace("/director/" +movie.Director.Name) }}>
+          {movie.Director.Name}</Button>
+         <Button className="backButton" onClick={() => { window.location.replace("/genre/" +movie.Genre.Name) }}>
+          {movie.Genre.Name}</Button>
         </div>
     );
   }

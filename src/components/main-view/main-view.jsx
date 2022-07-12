@@ -113,10 +113,10 @@ export class MainView extends React.Component{
             onBackClick={this.onBackClick}  movies={movies} selectedMovie={selectedMovie} />} >
            </Route>
 
-           <Route exact={true} path="/director" element={ <DirectorView />} >
+           <Route exact={true} path="/director/:name" element={ <DirectorView  />} >
            </Route>
 
-           <Route exact={true} path="/genre" element={ <GenreView />} >
+           <Route exact={true} path="/genre/:name" element={ <GenreView />} >
            </Route>
 
           </Routes>
