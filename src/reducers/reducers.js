@@ -11,7 +11,7 @@ function visibilityFilter(state = '', action) {
     }
 }
 
-funtion movies(state = [], action) {
+function movies(state = [], action) {
     switch (action.type) {
         case SET_MOVIES:
             return action.value;

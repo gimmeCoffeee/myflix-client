@@ -1,10 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Redirect, Routes } from "react-router-dom";
+import { setMovies } from '../../actions/actions';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import MoviesList from '../movies-view/movies-view';
+// import MoviesList from '../movies-list/movies-list';
 import "../../index.scss"
 import { Container, Row, Col, Button, Header } from 'react-bootstrap';
 import { Login } from '../login-view/login-view';
@@ -14,11 +17,11 @@ import GenreView from '../genre-view/genre-view';
 
  const url = 'https://movieapi-0162.herokuapp.com/';
 
-export class MainView extends React.Component{
+class MainView extends React.Component{
       constructor() {
         super();
         this.state = {
-          movies: [],
+          // movies: [],
           selectedMovie: null,
           user: '',
           reg: false,
@@ -54,7 +57,7 @@ export class MainView extends React.Component{
           headers : {
             Authorization : 'Bearer '+localStorage.getItem('token')
           }
-        }).then(result=>this.setState({movies: result.data}) )
+        }).then(result=>this.props.setMovies(result.data) )
         .catch(function (error) {
           console.log(error);
         });
@@ -96,7 +99,8 @@ export class MainView extends React.Component{
       // 
 
     render() {
-      const { movies, selectedMovie, user, reg } = this.state;      
+      let { movies } = this.props;
+      const { selectedMovie, user, reg } = this.state;      
         return (
           <div>
             <Router>
@@ -127,7 +131,12 @@ export class MainView extends React.Component{
 
     }
     
-
+    let mapStateToProps = state => {
+      return { movies: state.movies }
+    }
+    
+    // #8
+    export default connect(mapStateToProps, { setMovies } )(MainView);
 
     
   
